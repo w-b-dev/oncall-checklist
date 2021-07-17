@@ -1,6 +1,7 @@
 import { Commit } from "../types";
 
 export const getCommits = (): Commit[] => {
+  /* TODO: mock this as a Promise */
   return mockCommitList;
 };
 
