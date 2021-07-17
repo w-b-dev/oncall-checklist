@@ -23,7 +23,7 @@ export function CommitSelector({
         defaultValue={"N/A"}
       >
         <option disabled value={"N/A"}>
-          -- select an option --
+          -- list of commits --
         </option>
         {log
           .map((entry, i) => {
@@ -33,16 +33,16 @@ export function CommitSelector({
                 value={entry.sha}
                 disabled={i <= currentIndex}
               >
-                {entry.sha}
+                {entry.sha.slice(0, 7)}
               </option>
             );
           })
           .reverse()}
       </select>
-      <span>
+      <code style={{ display: "block", padding: "1em", fontSize: "0.8em" }}>
         {log.find((entry) => entry.sha === targetSHA)?.message ??
-          "Try selecting a commit"}
-      </span>
+          `${log.length - 1 - currentIndex} commits waiting to be promoted`}
+      </code>
     </div>
   );
 }

@@ -3,17 +3,23 @@
 ## Tasks that are important to be manually checked
 
 - Check scope of the changes to deploy
+  - Offer to view the selecting a dropdown
+  - Big button with one-click-copy the GH diff
+- Show all the commits as CARDS, not list rows:
+  - Highlight Authors (avatar) in the row -- Emphasize responsible committer
+  - Highlight LOC affected per commit (and its contribution to overall % for the diff)
+  - Add link to each commit
 
-## Automated Tasks
+## Done Tasks
 
-The URL of the repo (and related tokens) is listed in the `.env`. 
+- [ ] TODO: Current Git SHA deployed
 
-- Current Git SHA deployed
-  - 1234567890 (autofilled)
+  - SHA 1234567 (autofilled form GH API)
 
-- Target Git SHA:
-  - Input field **987654321**
+- [x] Target Git SHA:
 
-- List diff upon completion of the previous field
+  - Dropdown with options
+
+- [x] List diff once previous step is complete
   - Must check if SHA is valid (included in the log)
-  - Must filter results from tip up to current SHA 
+  - Must filter results from tip up to current SHA
