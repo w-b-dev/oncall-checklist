@@ -6,12 +6,12 @@ export const getCommits = (): Commit[] => {
 };
 
 const mockCommitList: Commit[] = [
-  { sha: "123", message: "first commit" },
-  { sha: "456", message: "second commit" },
-  { sha: "456b", message: "b - second commit" },
-  { sha: "456c", message: "c - second commit" },
+  { sha: "12", message: "first commit" },
+  { sha: "34", message: "second commit" },
+  { sha: "78", message: "c" },
+  { sha: "56", message: "b" },
   {
-    sha: "789",
+    sha: "90",
     message: "most recent commit",
   },
 ];
