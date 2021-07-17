@@ -1,6 +1,6 @@
 import React from "react";
 
-export function BaseCommitDisplay({
+function BaseCommitDisplay({
   currentSHA,
 }: {
   currentSHA: string;
@@ -12,3 +12,6 @@ export function BaseCommitDisplay({
     </div>
   );
 }
+
+export const MemoizedBaseCommitDisplay = React.memo(BaseCommitDisplay);
+export default MemoizedBaseCommitDisplay;
