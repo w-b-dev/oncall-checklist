@@ -8,7 +8,12 @@ function BaseCommitDisplay({
   return (
     <div>
       <label htmlFor="currentSHA">Current SHA:</label>
-      <input id="currentSHA" type="text" disabled value={currentSHA} />
+      <input
+        id="currentSHA"
+        type="text"
+        disabled
+        value={currentSHA.slice(0, 7)}
+      />
     </div>
   );
 }
