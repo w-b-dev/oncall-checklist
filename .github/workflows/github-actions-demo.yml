@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
-      - run: npm deploy
+      - run: npm run deploy
         #      --------------
       - name: List files in the repository
         run: |
