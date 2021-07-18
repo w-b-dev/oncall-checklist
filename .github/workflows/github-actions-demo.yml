@@ -3,6 +3,18 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      issues: write
+      metadata: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -27,9 +39,10 @@ jobs:
       - name: Install packages
         run: npm ci
         #      --------------
-      - name: Configure GIT remote
-        run: |
-          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
+#      - name: Configure GIT remote
+#        run: |
+#          git config remote.origin.url 'https://github.com/w-b-dev/oncall-checklist.git'
+#          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
         #      --------------
       - name: Deploy
         run: npm run deploy
