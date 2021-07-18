@@ -22,6 +22,9 @@ jobs:
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           global: true
+          name: 'Daniel'
+          email: 'iam@w-b.dev'
+          actor: 'w-b-dev'
           token: '${{ secrets.GITHUB_TOKEN }}'
 #      --------------
       - name: Check out repository code
