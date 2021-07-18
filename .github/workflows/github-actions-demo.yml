@@ -46,10 +46,10 @@ jobs:
       - name: Install packages
         run: npm ci
         #      --------------
-#      - name: Configure GIT remote
-#        run: |
+      - name: Configure GIT remote
+        run: |
 #          git config remote.origin.url 'https://github.com/w-b-dev/oncall-checklist.git'
-#          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
+          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
         #      --------------
       - name: Deploy
         run: npm run deploy
