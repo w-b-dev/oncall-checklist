@@ -18,9 +18,5 @@ F
 setup.md,5/9/59c29e6d14cabdfb24712539d5081d27a253ce9f
 <
 .eslintrc.js,d/b/dbc0c31823b8f2e4ed04a397722fed33a67f123f
-=
-src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
 F
 src/reportWebVitals.ts,d/9/d938938695d447dadda115e28781c6541f53fc4f
-4
-.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
