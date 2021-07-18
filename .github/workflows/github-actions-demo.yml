@@ -23,13 +23,16 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
+        #      --------------
+      - name: Install packages
         run: npm ci
         #      --------------
       - name: Configure GIT remote
         run: |
           git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
-        #      RUN THE DEPLOY--------------
-      - run: npm run deploy
+        #      --------------
+      - name: Deploy
+        run: npm run deploy
         #      --------------
       - name: List files in the repository
         run: |
