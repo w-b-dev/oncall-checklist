@@ -1,66 +1,44 @@
-name: GitHub Actions Demo
-on: [push]
+name: Deploy to GH Pages upon push to `master`
+on:
+  push:
+    branches:
+    - master
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-#    permissions:
-#      actions: write
-#      checks: write
-#      contents: write
-#      deployments: write
-#      issues: write
-#      packages: write
-#      pull-requests: write
-#      repository-projects: write
-#      security-events: write
-#      statuses: write
     steps:
-#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#      --------------
-#      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-#        with:
-#          global: true
-#          name: 'Daniel'
-#          email: 'iam@w-b.dev'
-#          actor: 'w-b-dev'
-#          token: '${{ secrets.GITHUB_TOKEN }}'
-#      --------------
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-        #      --------------
-#      - name: Set GIT credentials
-#        run: |
-#          git config --global user.name "w-b-dev"
-#          git config --global user.email "iam@w-b.dev"
-        #      --------------
-#      - name: Setup Node
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: '14'
-#          cache: 'npm'
         #      --------------
       - name: Install packages
         run: npm ci
         #      --------------
-#      - name: Configure GIT remote
-#        run: |
-#          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
-        #          git config remote.origin.url 'https://github.com/w-b-dev/oncall-checklist.git'
-        #      --------------
       - name: Build
         run: npm run build
-#      - name: Deploy
-#        run: npm run deploy
         #      --------------
-#      - name: List files in the repository
-#        run: |
-#         ls ${{ github.workspace }}
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build # The folder the action should deploy.
+#      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+#      --------------
+#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+#      --------------
+#      - name: Set GIT credentials
+#        run: |
+#          git config --global user.name "w-b-dev"
+#          git config --global user.email "iam@w-b.dev"
+#      --------------
+#      - name: Setup Node
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '14'
+#          cache: 'npm'
+#      --------------
+#      - name: List files in the repository
+#        run: |
+#         ls ${{ github.workspace }}

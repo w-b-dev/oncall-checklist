@@ -31,7 +31,7 @@ function App(): JSX.Element {
 
   return (
     <main className="App">
-      <h1>v2: auto deploy</h1>
+      <h1>v3: deploy on **push-to-master** only</h1>
       <BaseCommitDisplay currentSHA={currentSHA} />
       <CommitSelector
         log={log}
