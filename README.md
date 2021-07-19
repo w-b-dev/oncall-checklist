@@ -30,3 +30,14 @@
 - [x] List diff once previous step is complete
   - Must check if SHA is valid (included in the log)
   - Must filter results from tip up to current SHA
+
+# Github actions
+
+# First one
+
+- Runs on push to master (meaning any merged pull request)
+- This is the one that actually deploys an artifact to `gh-pages` branch and makes the website live.
+
+# Second one
+
+- N/A
