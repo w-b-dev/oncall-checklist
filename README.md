@@ -14,7 +14,14 @@
 
 - [ ] TODO: Current Git SHA deployed
 
-  - SHA 1234567 (autofilled form GH API)
+  - Using a custom GH action, deploys to GH pages **on push** (Commit #A).
+  - The way this GH pages deploy work, Commit #A is built, detached to a **gh-pages branch**.
+  - Once the branch is saved, it gets a new SHA (Commit #B), however the commit subject makes reference to Commit #A
+    - `Deploying to gh-pages from @ w-b-dev/oncall-checklist@f8cef4bedac4401aa449cd5b163428752350330f 🚀`
+  - Extracting this `@foo` portion, yields the target commit.
+    - Call GH API for the branch `gh-pages`, and get the latest commit.
+    - Parse the commit subject and get the information we want (Commit #1).
+    - Save in the App State as the "current commit" prop (displaying it is wired up already).
 
 - [x] Target Git SHA:
 
