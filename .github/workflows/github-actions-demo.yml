@@ -15,17 +15,17 @@ jobs:
 #      security-events: write
 #      statuses: write
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 #      --------------
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          global: true
-          name: 'Daniel'
-          email: 'iam@w-b.dev'
-          actor: 'w-b-dev'
-          token: '${{ secrets.GITHUB_TOKEN }}'
+#      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+#        with:
+#          global: true
+#          name: 'Daniel'
+#          email: 'iam@w-b.dev'
+#          actor: 'w-b-dev'
+#          token: '${{ secrets.GITHUB_TOKEN }}'
 #      --------------
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -37,23 +37,27 @@ jobs:
 #          git config --global user.name "w-b-dev"
 #          git config --global user.email "iam@w-b.dev"
         #      --------------
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
+#      - name: Setup Node
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '14'
+#          cache: 'npm'
         #      --------------
       - name: Install packages
         run: npm ci
         #      --------------
-      - name: Configure GIT remote
-        run: |
-          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
+#      - name: Configure GIT remote
+#        run: |
+#          git config remote.origin.url 'https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}'
         #          git config remote.origin.url 'https://github.com/w-b-dev/oncall-checklist.git'
         #      --------------
-      - name: Deploy
-        run: npm run deploy
+      - name: Build
+        run: npm run build
+#      - name: Deploy
+#        run: npm run deploy
         #      --------------
-      - name: List files in the repository
-        run: |
-         ls ${{ github.workspace }}
+#      - name: List files in the repository
+#        run: |
+#         ls ${{ github.workspace }}
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
