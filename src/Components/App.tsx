@@ -4,25 +4,14 @@ import BaseCommitDisplay from "./BaseCommitDisplay";
 import { ListCommitDiff } from "./ListCommitDiff";
 import { CommitSelector } from "./CommitSelector";
 import { Commit } from "../types";
+import { useDeployedCommit } from "../customHooks/useDeployedCommit";
 
 function App(): JSX.Element {
   /*TODO: add Context to share state*/
-  const [currentSHA, setCurrentSHA] = useState<string>("");
   const [log, setLog] = useState<Commit[]>([]);
+  const currentSHA = useDeployedCommit();
   useEffect(() => {
     getCommits().then((res) => setLog(res));
-    const getDeployed = async () => {
-      const commit = await getDeployedCommit();
-      const commitMessage = commit?.message ?? "";
-      const startIndex = commitMessage.search(/@\d/) ?? -1;
-      const isValid = !!commitMessage && startIndex !== -1;
-      const extractCommit = (commitMessage: string) => {
-        return commitMessage.slice(startIndex + 1, commitMessage.length - 3);
-      };
-
-      if (isValid) setCurrentSHA(extractCommit(commitMessage));
-    };
-    getDeployed();
   }, []);
 
   const [selectedCommit, setSelectedCommit] = useState("");
