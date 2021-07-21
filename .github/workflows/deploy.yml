@@ -12,23 +12,15 @@ jobs:
         #      --------------
       - name: Install packages
         run: npm ci
+        #      --------------
+      - name: Build project
+        run: npm run build
 #        #      --------------
-      - name: Deploy with gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MY_EMAIL: iam@w-b.dev
-          MY_NAME: Daniel
-        run: |
-          git config --global user.email $MY_EMAIL
-          git config --global user.name $MY_NAME
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -d build -u "$MY_NAME <$MY_EMAIL>"
-#        #      --------------
-#      - name: Deploy to GitHub Pages
-#        uses: JamesIves/github-pages-deploy-action@4.1.4
-#        with:
-#          branch: gh-pages # The branch the action should deploy to.
-#          folder: build # The folder the action should deploy.
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
 #      --------------
       - name: List files in the repository
         run: |
