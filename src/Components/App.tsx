@@ -11,15 +11,25 @@ function App(): JSX.Element {
   const [log, setLog] = useState<Commit[]>([]);
   useEffect(() => {
     getCommits().then((res) => setLog(res));
+    getCommits("gh-pages").then((res) => {
+      const parsedCommit = res
+        .reverse()
+        .find((commit) => commit.message.search(/@\d/));
+      const commitMessage = parsedCommit?.message ?? "";
+      const startIndex = commitMessage.search(/@\d/) ?? -1;
+      const isValid = parsedCommit !== undefined && startIndex !== -1;
+      setCurrentSHA(
+        isValid
+          ? commitMessage.slice(startIndex + 1, commitMessage.length - 3)
+          : ""
+      );
+    });
   }, []);
 
-  /*TODO: replace this useEffect with real info from Deploy/Netlify endpoint*/
-  useEffect(() => {
-    const rand = Math.random();
-    const randInitialCommit = Math.round(rand * log.length);
-    if (log.length) setCurrentSHA(log[randInitialCommit].sha);
-  }, [log]);
-  /*Above useEffect is temporary*/
+  // useEffect(() => {
+  //   console.log({ currentSHA });
+  // });
+
   const [selectedCommit, setSelectedCommit] = useState("");
   const handleCommitSelection = (event: SyntheticEvent<HTMLSelectElement>) => {
     const eventTarget = event.target as HTMLSelectElement;
