@@ -11,7 +11,7 @@ function App(): JSX.Element {
   const [log, setLog] = useState<Commit[]>([]);
   const currentSHA = useDeployedCommit();
   useEffect(() => {
-    getCommits().then((res) => setLog(res));
+    getCommits().then((res) => setLog(res.reverse()));
   }, []);
 
   const [selectedCommit, setSelectedCommit] = useState("");

@@ -5,12 +5,10 @@ const GITHUB_PAGES_BRANCH = "gh-pages";
 
 export const getCommits = async (branchOrSHA?: string): Promise<Commit[]> => {
   const res = await fetchFromGithub(branchOrSHA);
-  return res
-    .map((entry: { sha: string; commit: { message: string } }) => ({
-      sha: entry.sha,
-      message: entry.commit.message,
-    }))
-    .reverse();
+  return res.map((entry: { sha: string; commit: { message: string } }) => ({
+    sha: entry.sha,
+    message: entry.commit.message,
+  }));
 };
 
 export const getDeployedCommit = async (): Promise<Commit | undefined> => {
