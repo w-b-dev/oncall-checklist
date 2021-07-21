@@ -4,31 +4,15 @@ import BaseCommitDisplay from "./BaseCommitDisplay";
 import { ListCommitDiff } from "./ListCommitDiff";
 import { CommitSelector } from "./CommitSelector";
 import { Commit } from "../types";
+import { useDeployedCommit } from "../customHooks/useDeployedCommit";
 
 function App(): JSX.Element {
   /*TODO: add Context to share state*/
-  const [currentSHA, setCurrentSHA] = useState<string>("");
   const [log, setLog] = useState<Commit[]>([]);
+  const currentSHA = useDeployedCommit();
   useEffect(() => {
     getCommits().then((res) => setLog(res));
-    getCommits("gh-pages").then((res) => {
-      const parsedCommit = res
-        .reverse()
-        .find((commit) => commit.message.search(/@\d/));
-      const commitMessage = parsedCommit?.message ?? "";
-      const startIndex = commitMessage.search(/@\d/) ?? -1;
-      const isValid = parsedCommit !== undefined && startIndex !== -1;
-      setCurrentSHA(
-        isValid
-          ? commitMessage.slice(startIndex + 1, commitMessage.length - 3)
-          : ""
-      );
-    });
   }, []);
-
-  // useEffect(() => {
-  //   console.log({ currentSHA });
-  // });
 
   const [selectedCommit, setSelectedCommit] = useState("");
   const handleCommitSelection = (event: SyntheticEvent<HTMLSelectElement>) => {
@@ -41,7 +25,6 @@ function App(): JSX.Element {
 
   return (
     <main className="App">
-      <h1>v3: deploy on **push-to-master** only</h1>
       <BaseCommitDisplay currentSHA={currentSHA} />
       <CommitSelector
         log={log}

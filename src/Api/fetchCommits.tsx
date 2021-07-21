@@ -1,5 +1,7 @@
 import { Commit } from "../types";
 
+const GITHUB_PAGES_BRANCH = "gh-pages";
+
 export const getCommits = async (branchOrSHA?: string): Promise<Commit[]> => {
   const res = await fetchFromGithub(branchOrSHA);
   return res
@@ -8,19 +10,12 @@ export const getCommits = async (branchOrSHA?: string): Promise<Commit[]> => {
       message: entry.commit.message,
     }))
     .reverse();
-  // return mockCommitList;
 };
 
-/*const mockCommitList: Commit[] = [
-  { sha: "12", message: "first commit" },
-  { sha: "34", message: "second commit" },
-  { sha: "78", message: "c" },
-  { sha: "56", message: "b" },
-  {
-    sha: "90",
-    message: "most recent commit",
-  },
-];*/
+export const getDeployedCommit = async (): Promise<Commit | undefined> => {
+  const res = await getCommits(GITHUB_PAGES_BRANCH);
+  return res.reverse().find((commit) => commit.message.search(/@\d/));
+};
 
 const fetchFromGithub = async (branchOrSHA?: string) => {
   const ifBranchOrSHAProvided = branchOrSHA
