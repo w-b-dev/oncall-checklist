@@ -12,10 +12,9 @@ export const getCommits = async (branchOrSHA?: string): Promise<Commit[]> => {
     .reverse();
 };
 
-export const getDeployedCommit = async () => {
-  return await getCommits(GITHUB_PAGES_BRANCH).then((res) =>
-    res.reverse().find((commit) => commit.message.search(/@\d/))
-  );
+export const getDeployedCommit = async (): Promise<Commit | undefined> => {
+  const res = await getCommits(GITHUB_PAGES_BRANCH);
+  return res.reverse().find((commit) => commit.message.search(/@\d/));
 };
 
 const fetchFromGithub = async (branchOrSHA?: string) => {
