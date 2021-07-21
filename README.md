@@ -10,9 +10,18 @@
   - Highlight LOC affected per commit (and its contribution to overall % for the diff)
   - Add link to each commit
 
+## TODO
+
+- [ ] Style the background
+- [ ] Style the cards
+- [ ] Implement link to each commit in Github
+- [ ] Implement the one-click copy Github diff link feature
+- [ ] Implement the progress bar feature
+- [ ] Implement the avatar feature
+
 ## Done Tasks
 
-- [ ] TODO: Current Git SHA deployed
+- [x] TODO: Current Git SHA deployed
 
   - Using a custom GH action, deploys to GH pages **on push** (Commit #A).
   - The way this GH pages deploy work, Commit #A is built, detached to a **gh-pages branch**.
@@ -38,6 +47,8 @@
 - Runs on push to master (meaning any merged pull request)
 - This is the one that actually deploys an artifact to `gh-pages` branch and makes the website live.
 
-# Second one
+# TODO: Second one
 
-- N/A
+- all Pull Requests should deploy to another services (not GH Pages). Ideally moving towards a feature-branch model, but right now more like a prod/staging model.
+- This could have a custom domain (such as [staging.codein.ca](https://staging.codein.ca))
+- By definition, this staging has some commits on top of latest deploy (=== latest master), since whatever PR is an improvement
