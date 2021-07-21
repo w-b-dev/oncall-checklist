@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import { getCommits } from "../Api/fetchCommits";
+import { getCommits, getDeployedCommit } from "../Api/fetchCommits";
 import BaseCommitDisplay from "./BaseCommitDisplay";
 import { ListCommitDiff } from "./ListCommitDiff";
 import { CommitSelector } from "./CommitSelector";
@@ -11,24 +11,19 @@ function App(): JSX.Element {
   const [log, setLog] = useState<Commit[]>([]);
   useEffect(() => {
     getCommits().then((res) => setLog(res));
-    getCommits("gh-pages").then((res) => {
-      const parsedCommit = res
-        .reverse()
-        .find((commit) => commit.message.search(/@\d/));
-      const commitMessage = parsedCommit?.message ?? "";
+    const getDeployed = async () => {
+      const commit = await getDeployedCommit();
+      const commitMessage = commit?.message ?? "";
       const startIndex = commitMessage.search(/@\d/) ?? -1;
-      const isValid = parsedCommit !== undefined && startIndex !== -1;
-      setCurrentSHA(
-        isValid
-          ? commitMessage.slice(startIndex + 1, commitMessage.length - 3)
-          : ""
-      );
-    });
-  }, []);
+      const isValid = !!commitMessage && startIndex !== -1;
+      const extractCommit = (commitMessage: string) => {
+        return commitMessage.slice(startIndex + 1, commitMessage.length - 3);
+      };
 
-  // useEffect(() => {
-  //   console.log({ currentSHA });
-  // });
+      if (isValid) setCurrentSHA(extractCommit(commitMessage));
+    };
+    getDeployed();
+  }, []);
 
   const [selectedCommit, setSelectedCommit] = useState("");
   const handleCommitSelection = (event: SyntheticEvent<HTMLSelectElement>) => {
@@ -41,7 +36,6 @@ function App(): JSX.Element {
 
   return (
     <main className="App">
-      <h1>v3: deploy on **push-to-master** only</h1>
       <BaseCommitDisplay currentSHA={currentSHA} />
       <CommitSelector
         log={log}
