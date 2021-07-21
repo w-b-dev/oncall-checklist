@@ -1,7 +1,7 @@
 {
   "name": "oncall-checklist",
   "homepage": "https://w-b-dev.github.io/oncall-checklist",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
