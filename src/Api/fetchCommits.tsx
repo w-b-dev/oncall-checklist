@@ -1,4 +1,5 @@
 import { Commit } from "../types";
+import { SEARCH_PATTERN } from "../customHooks/useDeployedCommit";
 
 const GITHUB_PAGES_BRANCH = "gh-pages";
 
@@ -14,7 +15,9 @@ export const getCommits = async (branchOrSHA?: string): Promise<Commit[]> => {
 
 export const getDeployedCommit = async (): Promise<Commit | undefined> => {
   const res = await getCommits(GITHUB_PAGES_BRANCH);
-  return res.reverse().find((commit) => commit.message.search(/@\d/));
+  return res.find((commit) => {
+    return commit.message.match(SEARCH_PATTERN);
+  });
 };
 
 const fetchFromGithub = async (branchOrSHA?: string) => {
