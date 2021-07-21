@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-sonarlint
+/.idea
 
 # production
 /build
