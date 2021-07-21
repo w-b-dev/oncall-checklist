@@ -1,4 +1,4 @@
-name: Deploy to GH Pages upon push to `master`
+name: Explore-GitHub-Actions
 on:
   push:
     branches:
