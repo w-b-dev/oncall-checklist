@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import { getCommits, getDeployedCommit } from "../Api/fetchCommits";
+import { getCommits } from "../Api/fetchCommits";
 import BaseCommitDisplay from "./BaseCommitDisplay";
 import { ListCommitDiff } from "./ListCommitDiff";
 import { CommitSelector } from "./CommitSelector";
