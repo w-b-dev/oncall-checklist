@@ -25,12 +25,11 @@ function App(): JSX.Element {
 
   return (
     <main
-      className="App default-flex"
+      className="default-flex"
       style={{
         color: "white",
         height: "100vh",
         maxWidth: "50vw",
-        paddingTop: "33vh",
         justifyContent: "initial", //override
       }}
     >
